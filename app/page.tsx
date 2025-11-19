@@ -1,34 +1,16 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { 
-  ShoppingCart, 
-  Search, 
-  Menu, 
-  X, 
-  ChevronRight, 
-  Star, 
-  Truck, 
-  ShieldCheck, 
-  Headphones, 
-  Smartphone, 
-  Laptop, 
-  Watch,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Phone,
-  Mail,
-  MessageCircle,
-  User
+import {
+  ShoppingCart, Search, Menu, X, ChevronRight, Star, Truck, ShieldCheck,
+  Headphones, Smartphone, Laptop, Watch, Facebook, Twitter, Instagram,
+  Linkedin, Phone, Mail, MessageCircle, User
 } from 'lucide-react';
 
 // Mock Data
 const PRODUCTS = [
   {
     id: 1,
-    name: "ProBook Elite G8",
-    category: "Laptops",
+    name: "ProBook Elite G8", category: "Laptops",
     price: 65000,
     rating: 4.8,
     reviews: 42,
@@ -121,14 +103,14 @@ export default function App() {
     setTimeout(() => setShowToast(false), 3000);
   };
 
-  // Format currency to KES
-  const formatCurrency = (amount) => {
+  // Format currency to KES (numbers only)
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(amount);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
-      
+
       {/* Announcement Bar */}
       <div className="bg-blue-900 text-white text-xs font-medium py-2 text-center px-4">
         Grand Opening Sale: Get 20% off with code <span className="font-bold text-yellow-400">JUMA20</span>
@@ -138,7 +120,7 @@ export default function App() {
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            
+
             {/* Logo */}
             <div className="flex items-center gap-2 cursor-pointer">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">J</div>
@@ -167,7 +149,7 @@ export default function App() {
                   </span>
                 )}
               </button>
-              <button 
+              <button
                 className="md:hidden text-gray-600 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
@@ -181,8 +163,8 @@ export default function App() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg py-2">
             {['Home', 'Shop', 'Why Us', 'Reviews', 'Contact'].map((item) => (
-              <a 
-                key={item} 
+              <a
+                key={item}
                 href={`#${item.toLowerCase().replace(' ', '-')}`}
                 className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
@@ -215,13 +197,13 @@ export default function App() {
             </div>
           </div>
         </div>
-        
+
         {/* Hero Image / Abstract Graphic */}
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-100">
-          <img 
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-95" 
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2070&q=80" 
-            alt="Workspace" 
+          <img
+            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-95"
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2070&q=80"
+            alt="Workspace"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent lg:via-transparent"></div>
         </div>
@@ -264,8 +246,8 @@ export default function App() {
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                    activeCategory === cat 
-                      ? 'bg-blue-600 text-white shadow-md' 
+                    activeCategory === cat
+                      ? 'bg-blue-600 text-white shadow-md'
                       : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                   }`}
                 >
@@ -279,10 +261,10 @@ export default function App() {
             {PRODUCTS.filter(p => activeCategory === 'All' || p.category === activeCategory).map((product) => (
               <div key={product.id} className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col">
                 <div className="relative h-64 bg-gray-200 overflow-hidden">
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-500" 
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-500"
                   />
                   {product.badge && (
                     <div className={`absolute top-3 right-3 text-white text-xs font-bold px-2 py-1 rounded ${product.badge === 'New' ? 'bg-green-500' : 'bg-red-500'}`}>
@@ -303,7 +285,7 @@ export default function App() {
                   </div>
                   <div className="mt-auto flex items-center justify-between">
                     <span className="text-lg font-bold text-blue-600">{formatCurrency(product.price)}</span>
-                    <button 
+                    <button
                       onClick={handleAddToCart}
                       className="bg-gray-900 hover:bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm"
                     >
@@ -314,10 +296,10 @@ export default function App() {
               </div>
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
             <a href="#" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 gap-2 group">
-              View All Products 
+              View All Products
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
@@ -365,7 +347,7 @@ export default function App() {
                 ))}
               </div>
             </div>
-            
+
             {/* Quick Links columns... */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Shop</h3>
@@ -405,13 +387,14 @@ export default function App() {
       </footer>
 
       {/* Toast Notification */}
-      <div className={`fixed bottom-5 right-5 transition-all duration-300 transform ${showToast ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} z-50`}>
-        <div className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3">
-          <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-             <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
-          </div>
-          <span>Item added to cart!</span>
-        </div>
+      <div
+        className={`
+          fixed bottom-5 right-5 px-4 py-3 rounded-lg shadow-lg text-white text-sm
+          bg-green-600 transition-all duration-300
+          ${showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5 pointer-events-none'}
+        `}
+      >
+        Item added to cart
       </div>
 
     </div>
